@@ -39,7 +39,7 @@ ToolsPro Hub respects your privacy. In short: no accounts, no ads, no tracking, 
 
 For help or feedback, contact:
 
-📧 israr_khan222@hotmail.com
+📧 toolsprohubsupport@gmail.com
 
 ## 👤 Developer
 
