@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ToolsPro Hub – Support</title>
+<meta name="description" content="Support and privacy for ToolsPro Hub, the iPhone app with a loan planner, currency converter, world clock, compass and more. No account, no ads, no tracking.">
+<meta name="theme-color" content="#05060b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2334d6b4'/%3E%3Cstop offset='1' stop-color='%239c8bff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='9' fill='%2305060b'/%3E%3Ccircle cx='16' cy='16' r='8' fill='url(%23g)'/%3E%3C/svg%3E">
+
+<style>
+  @property --a1 { syntax: "<color>"; inherits: true; initial-value: #5aa2ff; }
+  @property --a2 { syntax: "<color>"; inherits: true; initial-value: #34d6b4; }
+
+  :root {
+    --ink: #05060b;
+    --ink-2: #0b0e18;
+    --text: #eaf0ff;
+    --muted: #9aa6c4;
+    --line: rgba(255, 255, 255, .11);
+    --glass: rgba(255, 255, 255, .055);
+    --accent: #5aa2ff;
+    --a1: #5aa2ff;
+    --a2: #34d6b4;
+    --font: ui-rounded, "SF Pro Rounded", "Nunito", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --font-text: system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    transition: --a1 .9s ease, --a2 .9s ease;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--text);
+    font: 400 1.0625rem/1.65 var(--font-text);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* The aurora: three soft light pools that take the colour of whichever tool is selected. */
+  .aurora {
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background: var(--ink);
+    overflow: hidden;
+  }
+  .aurora i {
+    position: absolute; border-radius: 50%; filter: blur(90px); opacity: .5;
+    will-change: transform;
+  }
+  .aurora i:nth-child(1) { width: 62vmax; height: 62vmax; left: -18vmax; top: -22vmax; background: radial-gradient(circle, var(--a1), transparent 66%); }
+  .aurora i:nth-child(2) { width: 56vmax; height: 56vmax; right: -20vmax; top: 6vmax; background: radial-gradient(circle, var(--a2), transparent 66%); opacity: .42; }
+  .aurora i:nth-child(3) { width: 70vmax; height: 40vmax; left: 10vmax; bottom: -26vmax; background: radial-gradient(circle, var(--a1), transparent 66%); opacity: .22; }
+  @media (prefers-reduced-motion: no-preference) {
+    .aurora i:nth-child(1) { animation: drift1 28s ease-in-out infinite alternate; }
+    .aurora i:nth-child(2) { animation: drift2 34s ease-in-out infinite alternate; }
+    @keyframes drift1 { to { transform: translate(8vmax, 6vmax) scale(1.08); } }
+    @keyframes drift2 { to { transform: translate(-7vmax, 8vmax) scale(.94); } }
+  }
+
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+  .wrap { width: min(1120px, 100% - 2.5rem); margin-inline: auto; }
+
+  h1, h2, h3, .brand { font-family: var(--font); letter-spacing: -.025em; }
+  h1 span { display: block; white-space: nowrap; }
+  h1 { font-size: clamp(2rem, 4.3vw, 3.7rem); line-height: 1.02; font-weight: 750; margin: 0; text-wrap: balance; }
+  h2 { font-size: clamp(1.9rem, 4vw, 2.85rem); line-height: 1.08; font-weight: 720; margin: 0 0 1rem; text-wrap: balance; }
+  h3 { font-size: 1.2rem; line-height: 1.25; font-weight: 680; margin: 0 0 .4rem; letter-spacing: -.015em; }
+  p { margin: 0 0 1rem; }
+  .lede { font-size: clamp(1.1rem, 1.6vw, 1.28rem); line-height: 1.6; color: #c3cde6; max-width: 34em; }
+
+  /* Header */
+  header.top { padding: 1.4rem 0; }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .brand { display: inline-flex; align-items: center; gap: .65rem; font-weight: 720; font-size: 1.15rem; text-decoration: none; }
+  .brand .mark {
+    width: 30px; height: 30px; border-radius: 9px; background: var(--ink);
+    box-shadow: inset 0 0 0 1px var(--line);
+    display: grid; place-items: center;
+  }
+  .brand .mark::after {
+    content: ""; width: 14px; height: 14px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--a2), var(--a1));
+  }
+  header.top nav { display: flex; gap: 1.4rem; font-size: .95rem; color: var(--muted); }
+  header.top nav a { text-decoration: none; padding: .3rem 0; }
+  header.top nav a:hover { color: var(--text); }
+
+  /* Hero */
+  .hero { padding: clamp(1.5rem, 4vw, 3.5rem) 0 clamp(3rem, 7vw, 6rem); }
+  .hero .wrap { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(1.5rem, 5vw, 4.5rem); align-items: center; }
+  .hero-copy .lede { margin: 1.4rem 0 1.8rem; }
+
+  .actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-bottom: 2.4rem; }
+  .btn {
+    display: inline-flex; align-items: center; gap: .55rem;
+    padding: .85rem 1.35rem; border-radius: 999px; text-decoration: none;
+    font: 650 1rem/1 var(--font); letter-spacing: -.01em;
+    transition: transform .15s ease, background .2s ease;
+  }
+  .btn.primary { background: var(--text); color: #070912; }
+  .btn.primary:hover { transform: translateY(-1px); background: #fff; }
+  .btn.ghost { background: var(--glass); box-shadow: inset 0 0 0 1px var(--line); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .btn.ghost:hover { background: rgba(255,255,255,.1); }
+
+  /* Tool switcher */
+  .tools { list-style: none; margin: 0; padding: 0; max-width: 31rem; }
+  .tools li { margin: 0; }
+  .tool {
+    --c: #fff;
+    width: 100%; text-align: left; cursor: pointer;
+    background: none; border: 0; color: var(--muted);
+    display: grid; grid-template-columns: 14px 1fr; column-gap: .9rem; align-items: start;
+    padding: .55rem .2rem .55rem 0; font: inherit;
+    border-radius: 12px;
+  }
+  .tool .dot { width: 14px; height: 14px; border-radius: 50%; margin-top: .42rem; background: var(--c); opacity: .5; transition: opacity .2s, box-shadow .3s, transform .3s; }
+  .tool .name { font: 650 1.12rem/1.5 var(--font); letter-spacing: -.01em; transition: color .2s; }
+  .tool .blurb { grid-column: 2; display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s ease; font-size: .98rem; line-height: 1.55; }
+  .tool .blurb > span { overflow: hidden; }
+  .tool:hover .name { color: var(--text); }
+  .tool:hover .dot { opacity: .9; }
+  .tool[aria-selected="true"] { color: #c3cde6; }
+  .tool[aria-selected="true"] .name { color: var(--text); }
+  .tool[aria-selected="true"] .dot { opacity: 1; transform: scale(1.15); box-shadow: 0 0 0 4px color-mix(in srgb, var(--c) 28%, transparent), 0 0 22px var(--c); }
+  .tool[aria-selected="true"] .blurb { grid-template-rows: 1fr; }
+  .tools-note { margin: 1.1rem 0 0; font-size: .9rem; color: var(--muted); max-width: 30rem; }
+
+  /* Phone */
+  .stage { display: grid; place-items: center; position: relative; }
+  .phone {
+    position: relative; width: min(300px, 74vw); aspect-ratio: 540 / 1103;
+    border-radius: 46px; padding: 9px;
+    background: linear-gradient(155deg, #3a4156, #0c0f19 38%, #1b2133);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.14),
+      0 40px 90px -20px rgba(0,0,0,.75),
+      0 0 120px -10px color-mix(in srgb, var(--accent) 38%, transparent);
+    transition: box-shadow .9s ease;
+  }
+  .phone .screen { position: relative; width: 100%; height: 100%; border-radius: 38px; overflow: hidden; background: #05060b; }
+  .phone .screen img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+    opacity: 0; transform: scale(1.015); transition: opacity .45s ease, transform .6s ease;
+  }
+  .phone .screen img.on { opacity: 1; transform: none; }
+  .phone .glare { position: absolute; inset: 9px; border-radius: 38px; pointer-events: none; background: linear-gradient(115deg, rgba(255,255,255,.09), transparent 32%); }
+
+  /* Sections */
+  section { padding: clamp(3rem, 7vw, 6rem) 0; }
+  .section-head { max-width: 38rem; margin-bottom: 2.2rem; }
+  .section-head p { color: #c3cde6; margin: 0; }
+
+  /* Up close gallery */
+  .rail {
+    display: flex; gap: 1.6rem; overflow-x: auto; padding: .5rem max(1.25rem, calc((100vw - 1120px) / 2)) 1.6rem;
+    scroll-snap-type: x mandatory; scroll-padding-inline: max(1.25rem, calc((100vw - 1120px) / 2));
+    scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.25) transparent;
+  }
+  .rail figure { margin: 0; flex: 0 0 auto; width: 232px; scroll-snap-align: start; }
+  .rail .mini {
+    border-radius: 34px; padding: 7px; background: linear-gradient(155deg, #353c50, #0c0f19 45%, #1b2133);
+    box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 28px 60px -24px rgba(0,0,0,.8);
+  }
+  .rail .mini img { display: block; width: 100%; height: auto; border-radius: 28px; aspect-ratio: 540 / 1103; background: #05060b; }
+  .rail figcaption { margin-top: .9rem; font-size: .95rem; line-height: 1.5; color: #c3cde6; padding-right: .5rem; }
+  .rail figcaption b { display: block; color: var(--text); font: 650 1.02rem/1.35 var(--font); margin-bottom: .15rem; }
+
+  /* Privacy */
+  .privacy-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 1.4rem; }
+  .panel {
+    border-radius: 30px; padding: clamp(1.4rem, 3vw, 2.1rem);
+    background: linear-gradient(160deg, rgba(255,255,255,.075), rgba(255,255,255,.03));
+    box-shadow: inset 0 0 0 1px var(--line);
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  }
+  .panel.stay { box-shadow: inset 0 0 0 1px color-mix(in srgb, #34d6b4 40%, transparent); background: linear-gradient(160deg, color-mix(in srgb, #34d6b4 14%, transparent), rgba(255,255,255,.03) 60%); }
+  .panel h3 { display: flex; align-items: center; gap: .6rem; }
+  .panel ul { margin: .9rem 0 0; padding: 0; list-style: none; display: grid; gap: .8rem; }
+  .panel li { padding-left: 1.5rem; position: relative; color: #c3cde6; line-height: 1.55; }
+  .panel li::before { content: ""; position: absolute; left: 0; top: .6em; width: 8px; height: 8px; border-radius: 50%; background: #34d6b4; }
+  .panel.out li::before { background: transparent; box-shadow: inset 0 0 0 2px #f0b94a; }
+  .panel li b { color: var(--text); font-weight: 650; }
+  .privacy-foot { margin-top: 1.6rem; display: flex; flex-wrap: wrap; gap: .6rem 1.4rem; align-items: center; color: var(--muted); font-size: .98rem; }
+  .privacy-foot a { color: var(--text); text-underline-offset: 4px; text-decoration-color: rgba(255,255,255,.4); }
+  .privacy-foot a:hover { text-decoration-color: var(--text); }
+
+  /* Help */
+  .help-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(1.5rem, 5vw, 4rem); align-items: start; }
+  .contact { border-radius: 30px; padding: clamp(1.4rem, 3vw, 2rem); background: var(--glass); box-shadow: inset 0 0 0 1px var(--line); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+  .contact p { color: #c3cde6; }
+  .contact .mail { display: block; font: 650 1.1rem/1.3 var(--font); word-break: break-all; margin: .2rem 0 1.3rem; text-decoration: none; }
+  .contact .mail:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .contact small { display: block; color: var(--muted); font-size: .9rem; line-height: 1.5; margin-top: 1rem; }
+
+  .faq details { border-top: 1px solid var(--line); }
+  .faq details:last-child { border-bottom: 1px solid var(--line); }
+  .faq summary {
+    list-style: none; cursor: pointer; padding: 1.15rem 2.5rem 1.15rem 0; position: relative;
+    font: 650 1.1rem/1.4 var(--font); letter-spacing: -.01em;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: ""; position: absolute; right: .3rem; top: 50%; width: 10px; height: 10px; margin-top: -8px;
+    border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); transition: transform .25s ease;
+  }
+  .faq details[open] summary::after { transform: rotate(225deg); margin-top: -3px; }
+  .faq .ans { padding: 0 2.5rem 1.3rem 0; color: #c3cde6; max-width: 40rem; }
+  .faq .ans p:last-child { margin-bottom: 0; }
+
+  footer { padding: 3rem 0 3.5rem; color: var(--muted); font-size: .95rem; border-top: 1px solid var(--line); }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem 2rem; }
+  footer a { text-decoration-color: rgba(255,255,255,.3); text-underline-offset: 4px; }
+  footer strong { color: var(--text); font-weight: 650; }
+
+  @media (max-width: 880px) {
+    .hero .wrap { grid-template-columns: minmax(0, 1fr); }
+    .hero-copy { min-width: 0; }
+    .stage { order: -1; margin-bottom: .5rem; }
+    .privacy-grid, .help-grid { grid-template-columns: minmax(0, 1fr); }
+    header.top nav { gap: 1rem; }
+    .phone { width: min(260px, 70vw); }
+    /* On small screens the switcher becomes a swipeable row; the selected tool's description sits beneath it. */
+    .tools { display: flex; gap: .4rem; overflow-x: auto; max-width: none; margin-inline: -1.25rem; padding: .2rem 1.25rem .6rem; scrollbar-width: none; }
+    .tools::-webkit-scrollbar { display: none; }
+    .tool { width: auto; flex: none; grid-template-columns: 10px auto; column-gap: .5rem; padding: .55rem .95rem .55rem .85rem; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); align-items: center; }
+    .tool .dot { width: 10px; height: 10px; margin-top: 0; }
+    .tool .name { font-size: .98rem; white-space: nowrap; }
+    .tool .blurb { display: none; }
+    .tool[aria-selected="true"] { background: rgba(255,255,255,.1); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 70%, transparent); }
+    .tool[aria-selected="true"] .dot { box-shadow: 0 0 12px var(--c); transform: none; }
+    .caption-m { display: block !important; }
+  }
+  .caption-m { display: none; margin: .6rem 0 0; color: #c3cde6; font-size: 1rem; min-height: 3.2em; }
+
+  @media (max-width: 520px) {
+    header.top nav a:nth-child(1) { display: none; }
+    .btn { padding: .8rem 1.15rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition-duration: .01ms !important; animation: none !important; }
+  }
+</style>
+</head>
+
+<body>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="mark" aria-hidden="true"></span>ToolsPro Hub</a>
+    <nav aria-label="Page">
+      <a href="#close">Screens</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#help">Help</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <h1><span>Eight everyday tools.</span> <span>No account.</span> <span>No tracking.</span></h1>
+        <p class="lede">ToolsPro Hub puts a loan planner, currency converter, world clock, compass and more into one iPhone app. Everything you enter stays on your phone.</p>
+        <div class="actions">
+          <a class="btn primary" href="https://apps.apple.com/app/id6757101912">Get it on the App Store</a>
+          <a class="btn ghost" href="#help">Get help</a>
+        </div>
+
+        <ul class="tools" role="tablist" aria-label="Tools inside the app" aria-orientation="vertical" id="tools"></ul>
+        <p class="caption-m" id="caption-m" aria-live="polite"></p>
+        <p class="tools-note" id="tools-note" hidden></p>
+      </div>
+
+      <div class="stage">
+        <div class="phone" id="phone">
+          <div class="screen" id="screen"></div>
+          <div class="glare"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="close" aria-labelledby="close-h">
+    <div class="wrap"><div class="section-head">
+      <h2 id="close-h">A closer look</h2>
+      <p>Real screens from the app. Swipe sideways.</p>
+    </div></div>
+    <div class="rail" tabindex="0" aria-label="App screenshots, scroll sideways">
+      <figure><div class="mini"><img src="assets/loan-detail.webp" width="540" height="1103" loading="lazy" alt="Loan Planner showing a home loan with monthly payment, total interest and a payoff plan"></div><figcaption><b>Know what a loan really costs</b>Monthly payment, total interest and how much you save by paying early.</figcaption></figure>
+      <figure><div class="mini"><img src="assets/loan-charts.webp" width="540" height="1103" loading="lazy" alt="Loan Planner charts splitting each payment into principal and interest over time"></div><figcaption><b>See where the money goes</b>Charts split every payment into principal and interest.</figcaption></figure>
+      <figure><div class="mini"><img src="assets/loan-penny.webp" width="540" height="1103" loading="lazy" alt="Penny, the built-in helper, explaining how to pick a kind of loan"></div><figcaption><b>Penny explains as you go</b>A built-in helper that says what each option means before you pick it.</figcaption></figure>
+      <figure><div class="mini"><img src="assets/tz-world.webp" width="540" height="1103" loading="lazy" alt="World clock showing several cities with day and night"></div><figcaption><b>A world clock that shows day and night</b>Add the cities you call, then convert or plan a meeting.</figcaption></figure>
+      <figure><div class="mini"><img src="assets/rates-chart.webp" width="540" height="1103" loading="lazy" alt="Currency history chart for a pair of currencies"></div><figcaption><b>Rates with history</b>Check a currency over time before you exchange.</figcaption></figure>
+      <figure><div class="mini"><img src="assets/units.webp" width="540" height="1103" loading="lazy" alt="Units tool with converters, kitchen measures and price comparison"></div><figcaption><b>Units for the kitchen and the room</b>Converters, kitchen measures, unit prices and room estimates.</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="privacy" aria-labelledby="privacy-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="privacy-h">Your data stays on your phone</h2>
+        <p>The app has no accounts, no ads and no servers of its own. The developer can’t see what you enter, and deleting the app removes it.</p>
+      </div>
+      <div class="privacy-grid">
+        <div class="panel stay">
+          <h3>Stays on your device</h3>
+          <ul>
+            <li><b>Your entries.</b> Loans, holdings, dates, Moments, saved cities and places, and settings are stored only on your phone.</li>
+            <li><b>Petal.</b> Cycle dates, symptoms and notes you log never leave your phone. Petal gives estimates only. It isn’t medical advice and can’t be used to prevent pregnancy.</li>
+            <li><b>Motion sensors.</b> Used on your device for the water-effect tiles, the level and climb tracking. Nothing is stored or shared.</li>
+            <li><b>Reminders.</b> Scheduled on your phone. No server sends them.</li>
+          </ul>
+        </div>
+        <div class="panel out">
+          <h3>Uses the internet</h3>
+          <ul>
+            <li><b>Currency rates.</b> The Currencies tool downloads public exchange rates. Requests contain only currency codes and dates. Like any internet request, the rate services can see your device’s IP address.</li>
+            <li><b>Place names.</b> If you allow location, it’s used only while the app is open, and names are looked up with Apple’s built-in service. Your location isn’t stored on any server of ours.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="privacy-foot">
+        <span>Read the full policy, last updated 17 November 2026.</span>
+        <a href="https://github.com/israrahmedkhan222-blip/toolspro-hub-support#-privacy-policy">Privacy policy</a>
+      </p>
+    </div>
+  </section>
+
+  <section id="help" aria-labelledby="help-h">
+    <div class="wrap help-grid">
+      <div>
+        <h2 id="help-h">Need a hand?</h2>
+        <div class="contact">
+          <p>Email us and say which tool you were using, what you expected and what happened. A screenshot helps.</p>
+          <a class="mail" href="mailto:israr_khan222@hotmail.com?subject=ToolsPro%20Hub%20support">israr_khan222@hotmail.com</a>
+          <a class="btn primary" href="mailto:israr_khan222@hotmail.com?subject=ToolsPro%20Hub%20support">Email support</a>
+          <small>Please don’t send medical, financial or other private details. We never need them to help.</small>
+        </div>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>Do I need an account?</summary>
+          <div class="ans"><p>No. There’s nothing to sign up for or sign in to. Open the app and use it.</p></div>
+        </details>
+        <details>
+          <summary>Where is my data stored, and how do I delete it?</summary>
+          <div class="ans"><p>On your phone only. Delete the app and everything you entered goes with it. You can also remove single items inside each tool, for example by swiping a Moment.</p></div>
+        </details>
+        <details>
+          <summary>The exchange rates look out of date</summary>
+          <div class="ans"><p>Rates come from public services and are shown with the date they were published, at the top of the Currencies tool. Tap the refresh icon while you’re online. Rates are for reference and aren’t what a bank or card will charge you.</p></div>
+        </details>
+        <details>
+          <summary>Compass or Timezones can’t find my location</summary>
+          <div class="ans"><p>Location is optional. Open Settings on your iPhone, choose ToolsPro Hub, then Location, and allow it while using the app. You can still add cities and places by hand without it.</p></div>
+        </details>
+        <details>
+          <summary>Is Petal medical advice?</summary>
+          <div class="ans"><p>No. Petal gives estimates from the dates you log. It can’t be used to prevent pregnancy. Please talk to a doctor about any health concern.</p></div>
+        </details>
+        <details>
+          <summary>Are the loan and portfolio numbers financial advice?</summary>
+          <div class="ans"><p>No. They are calculators that show the maths of what you enter. Check real terms with your lender or broker before you decide.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><strong>Made by Tinyforge Studio</strong><br>© 2025–2026 Israr Ahmed Khan. All rights reserved.</div>
+    <div><a href="https://apps.apple.com/app/id6757101912">App Store</a> &nbsp;&nbsp; <a href="https://github.com/israrahmedkhan222-blip/toolspro-hub-support#-privacy-policy">Privacy policy</a> &nbsp;&nbsp; <a href="mailto:israr_khan222@hotmail.com?subject=ToolsPro%20Hub%20support">Contact</a></div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var TOOLS = [
+    { id: 'loan',      name: 'Loan Planner', img: 'loan-list',  c: '#5aa2ff', c2: '#7d8cff', text: 'Compare monthly payments, see the interest, and test paying off early. Penny explains each option as you go.' },
+    { id: 'portfolio', name: 'Portfolio',    img: 'portfolio',  c: '#43d3ee', c2: '#5aa2ff', text: 'Track stock holdings, profit and average cost, and size a trade before you place it.' },
+    { id: 'timezones', name: 'Timezones',    img: 'tz-meet',    c: '#34d6b4', c2: '#43d3ee', text: 'A world clock, a converter and a meeting planner that shows who is awake.' },
+    { id: 'currency',  name: 'Currencies',   img: 'currency',   c: '#f0b94a', c2: '#ff9760', text: 'Exchange rates for 200+ currencies, with history and charts.' },
+    { id: 'moments',   name: 'Moments',      img: 'moments',    c: '#9c8bff', c2: '#5aa2ff', text: 'Countdowns, milestones, ages and date gaps, with reminders for the ones that matter.' },
+    { id: 'petal',     name: 'Petal',        img: 'home',       c: '#ff7aa8', c2: '#9c8bff', text: 'A private cycle and period tracker. What you log never leaves your phone.', note: 'Petal’s own screens are left out of screenshots because they’re personal. You’re looking at the home screen it sits on.' },
+    { id: 'compass',   name: 'Compass',      img: 'compass',    c: '#5ee08a', c2: '#34d6b4', text: 'Places, altitude, level and Qibla in one screen.' },
+    { id: 'units',     name: 'Units',        img: 'units',      c: '#ff9760', c2: '#f0b94a', text: 'Converters, kitchen measures, unit prices and room estimates.' }
+  ];
+
+  var list = document.getElementById('tools');
+  var screen = document.getElementById('screen');
+  var captionM = document.getElementById('caption-m');
+  var note = document.getElementById('tools-note');
+  var root = document.documentElement;
+  var imgs = {}, btns = [], current = -1;
+
+  TOOLS.forEach(function (t, i) {
+    var img = document.createElement('img');
+    img.src = 'assets/' + t.img + '.webp';
+    img.width = 540; img.height = 1103;
+    img.alt = t.id === 'petal' ? 'ToolsPro Hub home screen with all eight tools' : t.name + ' screen in ToolsPro Hub';
+    if (i > 0) img.loading = 'lazy';
+    screen.appendChild(img);
+    imgs[t.id] = img;
+
+    var li = document.createElement('li');
+    li.setAttribute('role', 'presentation');
+    var b = document.createElement('button');
+    b.className = 'tool';
+    b.type = 'button';
+    b.setAttribute('role', 'tab');
+    b.id = 'tab-' + t.id;
+    b.setAttribute('aria-selected', 'false');
+    b.tabIndex = -1;
+    b.style.setProperty('--c', t.c);
+    b.innerHTML = '<span class="dot"></span><span class="name"></span><span class="blurb"><span></span></span>';
+    b.querySelector('.name').textContent = t.name;
+    b.querySelector('.blurb span').textContent = t.text;
+    b.addEventListener('click', function () { select(i, false); });
+    b.addEventListener('keydown', function (e) {
+      var k = e.key, n = -1;
+      if (k === 'ArrowDown' || k === 'ArrowRight') n = (i + 1) % TOOLS.length;
+      else if (k === 'ArrowUp' || k === 'ArrowLeft') n = (i - 1 + TOOLS.length) % TOOLS.length;
+      else if (k === 'Home') n = 0;
+      else if (k === 'End') n = TOOLS.length - 1;
+      if (n > -1) { e.preventDefault(); select(n, true); }
+    });
+    li.appendChild(b);
+    list.appendChild(li);
+    btns.push(b);
+  });
+
+  function select(i, focus) {
+    if (i === current) return;
+    var t = TOOLS[i];
+    if (current > -1) {
+      btns[current].setAttribute('aria-selected', 'false');
+      btns[current].tabIndex = -1;
+      imgs[TOOLS[current].id].classList.remove('on');
+    }
+    btns[i].setAttribute('aria-selected', 'true');
+    btns[i].tabIndex = 0;
+    imgs[t.id].classList.add('on');
+    root.style.setProperty('--a1', t.c);
+    root.style.setProperty('--a2', t.c2);
+    root.style.setProperty('--accent', t.c);
+    captionM.textContent = t.text;
+    if (t.note) { note.textContent = t.note; note.hidden = false; } else { note.hidden = true; }
+    if (focus) btns[i].focus();
+    if (window.matchMedia('(max-width: 880px)').matches) {
+      list.scrollTo({ left: btns[i].offsetLeft - (list.clientWidth - btns[i].offsetWidth) / 2, behavior: 'smooth' });
+    }
+    current = i;
+  }
+
+  select(0, false);
+})();
+</script>
+</body>
+</html>
