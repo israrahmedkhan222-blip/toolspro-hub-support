@@ -17,7 +17,7 @@ ToolsPro Hub is an all-in-one app of everyday tools, designed to be clean, fast 
 
 ## 🔒 Privacy Policy
 
-_Last updated: 17 November 2026_
+_Last updated: 18 November 2026_
 
 ToolsPro Hub respects your privacy. In short: no accounts, no ads, no tracking, and no data is collected or shared.
 
@@ -27,7 +27,7 @@ ToolsPro Hub respects your privacy. In short: no accounts, no ads, no tracking, 
 
 **Currency rates.** The Currencies tool downloads public exchange rates from public rate services. These requests contain only currency codes and dates, never personal information. As with any internet request, those services can see your device's IP address.
 
-**Location.** If you allow it, location is used only while the app is open: to detect your timezone and for Compass features such as saved places, altitude, sunrise and sunset, and Qibla. Place names are looked up with the built-in iOS service. Your location is not stored on any server of ours.
+**Location.** If you allow it, location is used only while the app is open: to detect your timezone and for Compass features such as saved places, altitude, sunrise and sunset, and Qibla. Place names are looked up with your phone’s built-in place-lookup service: Apple’s on iPhone, and the one provided by your device on Android, which can use Google’s location services. Your location is not stored on any server of ours.
 
 **Motion sensors.** Used on your device only, for the water-effect tiles, the level and climb tracking. Nothing is stored or shared.
 
